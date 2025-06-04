@@ -8,6 +8,8 @@ import imageRoutes from './routes/imageRoutes.js'; // Assuming you have imageRou
 import pdfRoutes from './routes/pdfRoutes.js'; // Assuming you have pdfRoutes defined
 import completionRoutes from './routes/completionRoutes.js'; // Assuming you have completionRoutes defined
 import enrollmentRoutes from './routes/enrollmentRoutes.js'; // Assuming you have enrollmentRoutes defined
+import sumissionRoutes from './routes/submissionRoutes.js'; // Assuming you have submissionRoutes defined
+
 const app = express();
 
 app.use(json());
@@ -26,6 +28,7 @@ app.use('api/images', imageRoutes)
 app.use("/api/pdfs", pdfRoutes); // Assuming you have pdfRoutes defined
 app.use("/api/completions", completionRoutes); // Assuming you have completionRoutes defined
 app.use("/api/enrollments", enrollmentRoutes);
+app.use("/api/sumissions", sumissionRoutes); // Assuming you have submissionRoutes defined
 
 
 export default app;

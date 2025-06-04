@@ -25,3 +25,19 @@ export const getUserEnrollments = async (req, res) => {
         res.status(500).json({ message: 'Could not fetch enrollments', error: err.message });
     }
 };
+
+
+// get all users enrolled in a course
+export const getCourseEnrollments = async (req, res) => {
+    const { courseId } = req.params;
+
+    try {
+        const enrollments = await Enrollment.findAll({
+            where: { course_id: courseId },
+            include: ['user'],
+        });
+        res.status(200).json(enrollments);
+    } catch (err) {
+        res.status(500).json({ message: 'Could not fetch course enrollments', error: err.message });
+    }
+}

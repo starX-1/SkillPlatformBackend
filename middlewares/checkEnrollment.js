@@ -20,7 +20,7 @@ export const checkEnrollment = async (req, res, next) => {
 
         // Otherwise, check enrollment
         const enrollment = await Enrollment.findOne({
-            where: { user_id, course_id }
+            where: { user_id    , course_id }
         });
 
         if (!enrollment) {
