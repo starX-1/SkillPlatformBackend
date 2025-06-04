@@ -3,6 +3,13 @@ export function validateModule(req, res, next) {
 
     const errors = [];
 
+    if (!title) {
+        errors.push('Title is required');
+    }
+    if (!module_order) {
+        errors.push('Module order is required');
+    }
+
     if (!title || typeof title !== 'string') {
         errors.push('Module title is required and must be a string.');
     }

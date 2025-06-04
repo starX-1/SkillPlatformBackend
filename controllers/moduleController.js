@@ -41,3 +41,49 @@ export async function getModulesByCourse(req, res) {
         res.status(500).json({ message: 'Server error' });
     }
 }
+
+export async function getModuleById(req, res) {
+    try {
+        const { moduleId } = req.params;
+
+        const module = await Module.findOne({
+            where: { id: moduleId },
+        });
+
+        if (!module) {
+            return res.status(404).json({ message: 'Module not found' });
+        }
+
+        res.json({ module });
+    } catch (error) {
+        console.error('Fetch module by ID error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+
+// Update a module
+export async function updateModule(req, res) {
+    try {
+        const { moduleId } = req.params;
+        const { title, module_order } = req.body;
+
+        const module = await Module.findOne({
+            where: { id: moduleId },
+        });
+
+        if (!module) {
+            return res.status(404).json({ message: 'Module not found' });
+        }
+
+        if (title) module.title = title;
+        if (module_order !== undefined) module.module_order = module_order;
+
+        await module.save();
+
+        res.json({ message: 'Module updated', module });
+    } catch (error) {
+        console.error('Update module error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
