@@ -7,6 +7,7 @@ import videoUpload from './routes/videoRoutes.js'; // Assuming you have videoRou
 import imageRoutes from './routes/imageRoutes.js'; // Assuming you have imageRoutes defined
 import pdfRoutes from './routes/pdfRoutes.js'; // Assuming you have pdfRoutes defined
 import completionRoutes from './routes/completionRoutes.js'; // Assuming you have completionRoutes defined
+import enrollmentRoutes from './routes/enrollmentRoutes.js'; // Assuming you have enrollmentRoutes defined
 const app = express();
 
 app.use(json());
@@ -24,7 +25,7 @@ app.use('/api/videos', videoUpload)
 app.use('api/images', imageRoutes)
 app.use("/api/pdfs", pdfRoutes); // Assuming you have pdfRoutes defined
 app.use("/api/completions", completionRoutes); // Assuming you have completionRoutes defined
-
+app.use("/api/enrollments", enrollmentRoutes);
 
 
 export default app;
