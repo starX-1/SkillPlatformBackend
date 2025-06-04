@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import authRoutes from './routes/authRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import moduleRoutes from './routes/moduleRoutes.js'; // Assuming you have moduleRoutes defined
+import lessonRoutes from './routes/lessonRoutes.js'; // Assuming you have lessonRoutes defined
 const app = express();
 
 app.use(json());
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/modules', moduleRoutes); // Assuming you have moduleRoutes defined
+app.use('/api/lessons', lessonRoutes); // Assuming you have lessonRoutes defined
 
 
 
