@@ -3,9 +3,10 @@ import authRoutes from './routes/authRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import moduleRoutes from './routes/moduleRoutes.js'; // Assuming you have moduleRoutes defined
 import lessonRoutes from './routes/lessonRoutes.js'; // Assuming you have lessonRoutes defined
-import videoUpload from './middlewares/videoUpload.js';
+import videoUpload from './routes/videoRoutes.js'; // Assuming you have videoRoutes defined
 import imageRoutes from './routes/imageRoutes.js'; // Assuming you have imageRoutes defined
 import pdfRoutes from './routes/pdfRoutes.js'; // Assuming you have pdfRoutes defined
+import completionRoutes from './routes/completionRoutes.js'; // Assuming you have completionRoutes defined
 const app = express();
 
 app.use(json());
@@ -22,6 +23,7 @@ app.use('/api/lessons', lessonRoutes); // Assuming you have lessonRoutes defined
 app.use('/api/videos', videoUpload)
 app.use('api/images', imageRoutes)
 app.use("/api/pdfs", pdfRoutes); // Assuming you have pdfRoutes defined
+app.use("/api/completions", completionRoutes); // Assuming you have completionRoutes defined
 
 
 
