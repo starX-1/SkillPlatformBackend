@@ -13,6 +13,9 @@ export function validateLesson(req, res, next) {
     if (video_url && typeof video_url !== 'string') {
         errors.push('Video URL must be a string.');
     }
+    if (content && typeof content !== 'string') {
+        errors.push('Content must be a string.');
+    }
 
     if (errors.length > 0) {
         return res.status(400).json({ message: 'Validation errors', errors });
