@@ -10,7 +10,13 @@ import completionRoutes from './routes/completionRoutes.js'; // Assuming you hav
 import enrollmentRoutes from './routes/enrollmentRoutes.js'; // Assuming you have enrollmentRoutes defined
 import sumissionRoutes from './routes/submissionRoutes.js'; // Assuming you have submissionRoutes defined
 
+import cors from 'cors';
+
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust this to your frontend URL
+}))
 
 app.use(json());
 
