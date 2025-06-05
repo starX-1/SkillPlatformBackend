@@ -18,6 +18,14 @@ export async function loginUser(req, res) {
         // generate token
         const token = generateToken(user);
 
+        // set the token in HttpOnly cookie 
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+        })
+
         return res.status(200).json({
             user: {
                 id: user.id,

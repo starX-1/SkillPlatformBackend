@@ -9,13 +9,17 @@ import pdfRoutes from './routes/pdfRoutes.js'; // Assuming you have pdfRoutes de
 import completionRoutes from './routes/completionRoutes.js'; // Assuming you have completionRoutes defined
 import enrollmentRoutes from './routes/enrollmentRoutes.js'; // Assuming you have enrollmentRoutes defined
 import sumissionRoutes from './routes/submissionRoutes.js'; // Assuming you have submissionRoutes defined
+import cookieParser from 'cookie-parser';
 
 import cors from 'cors';
 
 const app = express();
 
+app.use(cookieParser());
+
 app.use(cors({
     origin: 'http://localhost:3000', // Adjust this to your frontend URL
+    credentials: true, // Allow cookies to be sent with requests
 }))
 
 app.use(json());
