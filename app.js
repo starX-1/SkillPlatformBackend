@@ -34,7 +34,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/modules', moduleRoutes); // Assuming you have moduleRoutes defined
 app.use('/api/lessons', lessonRoutes); // Assuming you have lessonRoutes defined
 app.use('/api/videos', videoUpload)
-app.use('api/images', imageRoutes)
+app.use('/api/images', imageRoutes)
 app.use("/api/pdfs", pdfRoutes); // Assuming you have pdfRoutes defined
 app.use("/api/completions", completionRoutes); // Assuming you have completionRoutes defined
 app.use("/api/enrollments", enrollmentRoutes);
