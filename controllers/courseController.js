@@ -25,16 +25,32 @@ export async function createCourse(req, res) {
 
 export async function getAllCourses(req, res) {
     try {
-        const courses = await Course.findAll({
+        const page = parseInt(req.query.page) || 1; // default to page 1
+        const limit = parseInt(req.query.limit) || 3; // default to 10 items per page
+        const offset = (page - 1) * limit;
+
+        const { count, rows: courses } = await Course.findAndCountAll({
             include: [{ association: 'creator', attributes: ['id', 'full_name', 'email'] }],
             order: [['created_at', 'DESC']],
+            limit,
+            offset,
         });
-        res.json({ courses });
+
+        const totalPages = Math.ceil(count / limit);
+
+        res.json({
+            currentPage: page,
+            totalPages,
+            totalItems: count,
+            itemsPerPage: limit,
+            courses,
+        });
     } catch (error) {
         console.error('Get courses error:', error);
         res.status(500).json({ message: 'Server error' });
     }
 }
+
 
 export async function getCourseById(req, res) {
     try {
@@ -52,7 +68,7 @@ export async function getCourseById(req, res) {
         console.error('Get course by ID error:', error);
         res.status(500).json({ message: 'Server error' });
     }
-    
+
 }
 
 export async function updateCourse(req, res) {
