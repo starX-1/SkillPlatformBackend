@@ -4,7 +4,12 @@ import Enrollment from '../models/Enrollment.js';
 export const checkEnrollment = async (req, res, next) => {
     const user_id = req.user.id;
     const user_role = req.user.role;
-    const course_id = req.params.courseId || req.params.id || req.body.course_id;
+    const course_id =
+        req.params.courseId ||
+        req.params.id ||
+        req.body.course_id ||
+        req.query.course_id;
+
 
     if (!course_id) {
         return res.status(400).json({ message: 'Course ID is required.' });
@@ -20,7 +25,7 @@ export const checkEnrollment = async (req, res, next) => {
 
         // Otherwise, check enrollment
         const enrollment = await Enrollment.findOne({
-            where: { user_id    , course_id }
+            where: { user_id, course_id }
         });
 
         if (!enrollment) {

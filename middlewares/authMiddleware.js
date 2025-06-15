@@ -4,7 +4,7 @@ import User from '../models/user.js';
 /**
  * Middleware to protect routes by verifying JWT token from cookies.
  */
-export async function protect(req, res, next) {
+export async function   protect(req, res, next) {
     const token = req.cookies.token; // ✅ Get token from cookie
 
     if (!token) {

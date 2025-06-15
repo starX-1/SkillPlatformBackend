@@ -32,6 +32,11 @@ export async function getLessonsByModule(req, res) {
       order: [['lesson_order', 'ASC']],
     });
 
+    if (lessons.length === 0) {
+      // judt return a message 
+      return res.status(200).json({ message: 'No lessons found for this module' });
+    }
+
     res.status(200).json({ lessons });
   } catch (error) {
     console.error('Fetch lessons error:', error);
