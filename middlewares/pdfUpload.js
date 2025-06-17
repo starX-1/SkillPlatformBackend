@@ -9,7 +9,12 @@ const storage = new CloudinaryStorage({
         folder: 'skill-platform/pdfs',
         resource_type: 'raw',
         allowed_formats: ['pdf'],
-    },
+        public_id: (req, file) => {
+            const name = file.originalname.split('.')[0];
+            return `${Date.now()}-${name}`;
+        }
+    }
+
 });
 
 const pdfUpload = multer({ storage });
