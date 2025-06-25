@@ -6,6 +6,6 @@ import { checkEnrollment } from '../middlewares/checkEnrollment.js';
 const router = express.Router();
 
 router.post('/mark-complete', protect, checkEnrollment, markLessonComplete);
-router.get('/get-completed-lessons', protect, checkEnrollment, getCompletedLessons);
+router.post('/get-completed-lessons', protect, checkEnrollment, getCompletedLessons);
 
 export default router;
