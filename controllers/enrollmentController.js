@@ -55,7 +55,7 @@ export const getCourseEnrollments = async (req, res) => {
     try {
         const enrollments = await Enrollment.findAll({
             where: { course_id: courseId },
-            include: ['user'],
+            // include: ['user'],
         });
         res.status(200).json(enrollments);
     } catch (err) {
