@@ -11,6 +11,7 @@ import enrollmentRoutes from './routes/enrollmentRoutes.js'; // Assuming you hav
 import sumissionRoutes from './routes/submissionRoutes.js'; // Assuming you have submissionRoutes defined
 import cookieParser from 'cookie-parser';
 import quizRoutes from './routes/quizRoutes.js';
+import questionRoutes from './routes/questionRoutes.js';
 
 import cors from 'cors';
 
@@ -41,6 +42,7 @@ app.use("/api/completions", completionRoutes); // Assuming you have completionRo
 app.use("/api/enrollments", enrollmentRoutes);
 app.use("/api/sumissions", sumissionRoutes); // Assuming you have submissionRoutes defined
 app.use("/api/quizzes", quizRoutes);
+app.use("/api/questions", questionRoutes);
 
 
 export default app;
