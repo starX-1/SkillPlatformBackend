@@ -5,6 +5,7 @@ import {
     getQuizById,
     updateQuiz,
     deleteQuiz,
+    getUserQuizzesWithStatus,
 } from '../controllers/quizController.js';
 import { protect } from '../middlewares/authMiddleware.js';
 import { isAdmin } from '../middlewares/isAdmin.js';
@@ -17,5 +18,6 @@ router.get('/quiz/get-all', protect, getAllQuizzes);
 router.get('/quiz/get-by-id/:id', protect, getQuizById);
 router.put('/update/:id', protect, checkUploader, updateQuiz);
 router.delete('/delete/:id', protect, checkUploader, deleteQuiz);
+router.get('/quiz/user', protect, getUserQuizzesWithStatus);
 
 export default router;
