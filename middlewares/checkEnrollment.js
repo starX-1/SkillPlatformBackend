@@ -37,3 +37,26 @@ export const checkEnrollment = async (req, res, next) => {
         return res.status(500).json({ message: 'Error checking access.', error: err.message });
     }
 };
+
+// check if hes is the uploader of the course 
+export const checkUploader = async (req, res, next) => {
+    const user_id = req.user.id;
+    const user_role = req.user.role;
+    const course_id =
+        req.params.courseId ||
+        req.params.id ||
+        req.body.course_id ||
+        req.query.course_id;
+
+    if (!course_id) {
+        return res.status(400).json({ message: 'Course ID is required.' });
+    }
+
+    try {
+        const course = await Course.findByPk(course_id);
+        if (course && course.created_by === user_id) return next();
+        return res.status(403).json({ message: 'Access denied. You are not the uploader of this course.' });
+    } catch (err) {
+        return res.status(500).json({ message: 'Error checking access.', error: err.message });
+    }
+};
