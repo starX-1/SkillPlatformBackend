@@ -64,3 +64,14 @@ export const deleteQuestion = async (req, res, next) => {
         next(err);
     }
 };
+
+export const getQuestionsByQuiz = async (req, res, next) => {
+  try {
+    const { quiz_id } = req.params;
+    const questions = await Question.findAll({ where: { quiz_id } });
+
+    res.json(questions);
+  } catch (err) {
+    next(err);
+  }
+};
