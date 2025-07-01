@@ -94,3 +94,20 @@ export async function updateCourse(req, res) {
         res.status(500).json({ message: 'Server error' });
     }
 }
+
+export async function getCourseByUploader(req, res) {
+    try {
+        const userId = req.user.id;
+
+        const courses = await Course.findAll({
+            where: { created_by: userId },
+            order: [['created_at', 'DESC']],
+            include: [{ association: 'creator', attributes: ['id', 'full_name', 'email'] }]
+        })
+        res.json({ courses });
+
+    } catch (error) {
+        console.error('Get courses by uploader error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}

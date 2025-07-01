@@ -14,7 +14,7 @@ export const createQuiz = async (req, res, next) => {
             deadline,
             duration_minutes,
         });
-        res.status(201).json(quiz);
+        res.status(201).json({ id: quiz.id });
     } catch (err) {
         next(err);
     }
