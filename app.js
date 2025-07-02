@@ -14,6 +14,7 @@ import quizRoutes from './routes/quizRoutes.js';
 import questionRoutes from './routes/questionRoutes.js';
 import quizResponseRoutes from './routes/quizResponseRoutes.js';
 import questionAnswerRoutes from './routes/questionAnswerRoutes.js';
+import choiceRoutes from './routes/choiceRoutes.js';
 
 import cors from 'cors';
 
@@ -47,6 +48,7 @@ app.use("/api/quizzes", quizRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/quiz-responses", quizResponseRoutes)
 app.use("/api/question-answers", questionAnswerRoutes)
+app.use("/api/choices", choiceRoutes)
 
 
 export default app;
