@@ -185,3 +185,40 @@ export const getUserQuizzesWithStatus = async (req, res) => {
         res.status(500).json({ message: 'Failed to get quizzes with status' });
     }
 };
+
+
+export const startQuiz = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const quizId = req.params.id;
+
+        // checkif already started or submitted 
+        const existing = await QuizResponse.findOne({
+            where: { user_id: userId, quiz_id: quizId }
+        })
+
+        if (existing) {
+            if (existing.submitted_at) {
+                return res.status(400).json({ message: 'Quiz Already Submitted' })
+            }
+            return res.status(400).json({ message: 'Quiz Already Started' })
+        }
+
+        const response = QuizResponse.create({
+            user_is: userId,
+            quiz_id: quizId,
+            started_at: new Date(),
+            submitted_at: null
+
+        })
+
+        res.json({
+            message: 'Quiz started',
+            status: 'in_progress',
+            response
+        })
+    } catch (error) {
+        console.error('Error starting quiz:', error);
+        res.status(500).json({ message: 'Failed to start quiz' });
+    }
+}
