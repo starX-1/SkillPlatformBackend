@@ -3,13 +3,27 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const createQuizResponse = async (req, res, next) => {
     try {
-        const { user_id, quiz_id, submitted_at } = req.body;
+        // const { user_id, quiz_id, submitted_at } = req.body;
+        const user_id = req.user.id;
+        const { quiz_id } = req.body;
+
+
+        const existing = await QuizResponse.findOne({
+            where: { user_id: user_id, quiz_id: quiz_id }
+        })
+
+        if (existing) {
+            if (existing.submitted_at) {
+                return res.status(400).json({ message: 'Quiz Already Submitted' })
+            }
+            return res.status(400).json({ message: 'Quiz Already Started' })
+        }
 
         const response = await QuizResponse.create({
             id: uuidv4(),
             user_id,
             quiz_id,
-            submitted_at: submitted_at || null,
+            submitted_at: null,
         });
 
         res.status(201).json(response);

@@ -16,7 +16,7 @@ import { checkEnrollment } from '../middlewares/checkEnrollment.js';
 const router = express.Router();
 
 // ✅ Create a quiz response (protected, enrollment check)
-router.post('/create', protect, checkEnrollment, validateQuizResponseData, createQuizResponse);
+router.post('/create', protect, validateQuizResponseData, createQuizResponse);
 
 // ✅ Get all quiz responses (admin/instructor view)
 router.get('/get-all-responses', protect, checkEnrollment, getAllQuizResponses);
