@@ -5,7 +5,9 @@ import QuizResponse from '../models/QuizResponse.js';
 import Module from '../models/Module.js';
 import Course from '../models/Course.js';
 import Question from '../models/Question.js';
-import QuestionAnswer from '../models/QuestionAnswer.js';
+// import Choice from '../models/Choice.js';
+import { Op } from 'sequelize';
+import Choice from '../models/Choice.js';
 
 export const createQuiz = async (req, res, next) => {
     try {
@@ -124,13 +126,21 @@ export const getUserQuizzesWithStatus = async (req, res) => {
         const questionIds = questions.map(q => q.id);
         const mcQuestions = questions.filter(q => q.type === 'multiple_choice');
         const mcQuestionIds = mcQuestions.map(q => q.id);
+        console.log('MC Question IDs:', mcQuestionIds);
 
-        const answers = await QuestionAnswer.findAll({
+        const answers = await Choice.findAll({
             where: {
-                question_id: mcQuestionIds,
+                question_id: {
+                    [Op.in]: mcQuestionIds,
+                },
             },
             raw: true,
         });
+        const allAnswers = await Choice.findAll({ raw: true });
+        console.log("All Answers in DB:", allAnswers);
+
+
+        console.log('Fetched Answers:', answers);
 
         // 7. Build course and module maps for labels
         const courses = await Course.findAll({
@@ -205,7 +215,7 @@ export const startQuiz = async (req, res) => {
         }
 
         const response = QuizResponse.create({
-            user_is: userId,
+            user_id: userId,
             quiz_id: quizId,
             started_at: new Date(),
             submitted_at: null
