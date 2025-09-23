@@ -7,6 +7,7 @@ import {
     getQuizResponsesByQuiz,
     updateQuizResponse,
     deleteQuizResponse,
+    submitQuizResponse,
 } from '../controllers/quizResponseController.js';
 
 import { validateQuizResponseData } from '../middlewares/validateQuizResponse.js';
@@ -32,6 +33,9 @@ router.get('/get-quiz-responses/:quiz_id', protect, getQuizResponsesByQuiz);
 
 // ✅ Update a specific quiz response
 router.put('/update/:id', protect, checkEnrollment, validateQuizResponseData, updateQuizResponse);
+
+// ✅ Submit a quiz response
+router.put('/submit/:id', protect, submitQuizResponse);
 
 // ✅ Delete a quiz response
 router.delete('/delete/:id', protect, checkEnrollment, deleteQuizResponse);

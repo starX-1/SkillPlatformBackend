@@ -83,6 +83,25 @@ export const updateQuizResponse = async (req, res, next) => {
     }
 };
 
+// update quizet response to set submitted_at to current timestamp
+export const submitQuizResponse = async (req, res, next) => {
+    try {
+        //    find the response by id and user_id from req.user
+        const response = await QuizResponse.findOne({ where: { id: req.params.id, user_id: req.user.id } });
+        if (!response) return res.status(404).json({ message: 'Quiz response not found' });
+
+        if (response.submitted_at) {
+            return res.status(400).json({ message: 'Quiz Already Submitted' });
+        }
+
+        await response.update({ submitted_at: new Date() });
+        res.json(response);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
 export const deleteQuizResponse = async (req, res, next) => {
     try {
         const response = await QuizResponse.findByPk(req.params.id);
