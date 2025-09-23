@@ -20,6 +20,7 @@ export const createQuestionAnswer = async (req, res, next) => {
 
     res.status(201).json(answer);
   } catch (err) {
+    console.error(err)
     next(err);
   }
 };

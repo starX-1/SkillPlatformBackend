@@ -28,7 +28,7 @@ router.get('/get-quiz-response/:id', protect, checkEnrollment, getQuizResponseBy
 router.get('/get-user-quiz-responses/:user_id', protect, checkEnrollment, getQuizResponsesByUser);
 
 // ✅ Get all responses for a specific quiz
-router.get('/get-quiz-responses/:quiz_id', protect, checkEnrollment, getQuizResponsesByQuiz);
+router.get('/get-quiz-responses/:quiz_id', protect, getQuizResponsesByQuiz);
 
 // ✅ Update a specific quiz response
 router.put('/update/:id', protect, checkEnrollment, validateQuizResponseData, updateQuizResponse);
